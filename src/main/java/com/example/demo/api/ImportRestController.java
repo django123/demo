@@ -49,7 +49,7 @@ public class ImportRestController {
 
     @GetMapping(value="archivage")
     public void archive(@RequestParam(required = false) final String typeImport){
-        if (typeImport == null){
+        if (typeImport == null || typeImport.isEmpty()){
             importArchService.archive();
         }else {
             iImportArchOpService.archiveImport(TypeImportEnum.valueOf(typeImport));

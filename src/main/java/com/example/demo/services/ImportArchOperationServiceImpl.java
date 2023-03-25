@@ -31,10 +31,10 @@ public class ImportArchOperationServiceImpl implements IImportArchOpService{
         ImportArchModel importArchModel = new ImportArchModel();
         List<CarteModel> carteModels = carteRepo.findAll();
         carteModels.forEach(carteModel -> {
-            List<OperationModel> operationModels = operationRepo.findByStatut(OperationStatusEnum.TREATED);
+            List<OperationModel> operationModels = operationRepo.findByStatutAndTypeImport(OperationStatusEnum.TREATED,typeImportEnum);
             operationModels.stream()
                     .map(op -> importRepo.findByOperation_Id(op.getId()))
-                    .filter(imp -> (imp != null && imp.getUserDownload() != null && imp.getDateDownload() != null && imp.getTypeImport().equals(typeImportEnum)))
+                    .filter(imp -> (imp != null && imp.getUserDownload() != null && imp.getDateDownload() != null))
                     .forEach(importModel -> {
                         importArchModel.setFileId(String.valueOf(importModel.getOperation().getFichier().getId()));
                         importArchModel.setCodeMvt1(importModel.getCodeMvt1());

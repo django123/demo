@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,5 +22,6 @@ public class CarteModel implements Serializable {
     private String numCarte;
 
     @OneToMany(mappedBy = "carte")
+    @JsonIgnore
     private List<OperationModel> operations;
 }
