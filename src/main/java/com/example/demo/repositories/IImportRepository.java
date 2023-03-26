@@ -9,4 +9,7 @@ import java.util.List;
 public interface IImportRepository extends JpaRepository<ImportModel, Long> {
     List<ImportModel> findAllByTypeImport(TypeImportEnum typeImport);
     ImportModel findByOperation_Id(Long id);
+    List<ImportModel> findByUserDownloadIsNotNullAndDateDownloadIsNotNull();
+    List<ImportModel> findByTypeImportAndUserDownloadIsNotNullAndDateDownloadIsNotNull(TypeImportEnum typeImportEnum);
+
 }

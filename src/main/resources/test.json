@@ -1,0 +1,47 @@
+//implementer un service qui fourni les statistiques par typeImport dont userDownload et dateDownload sont non null
+[
+  {
+    "libelle": "Debit PCE Fraude",
+    "nombre non télécharger": 2,
+    "typeImport": "IMPORT_630_10207"
+  },
+  {
+    "libelle": "Emission d'un impayé",
+    "nombre non télécharger": 0,
+    "typeImport": "IMPORT_628_10211"
+  },
+  {
+    "libelle": "Debit Client BNPP",
+    "nombre non télécharger": 3,
+    "typeImport": "IMPORT_629_10213"
+  }
+];
+
+[
+  {
+  "libelle": "Debit PCE Fraude",
+  "nombre non télécharger": 2,
+  "typeImport": "IMPORT_630_10207"
+  }
+];
+
+[
+
+ "type de Fichier": {
+     {
+     "libelle": "Debit PCE Fraude",
+     "nombre traité": 2,
+    "typeImport": "IMPORT_630_10207"
+    },
+    {
+    "libelle": "Emission d'un impayé",
+    "nombre traité": 0,
+    "typeImport": "IMPORT_628_10211"
+    },
+    {
+    "libelle": "Debit Client BNPP",
+    "nombre traité": 3,
+    "typeImport": "IMPORT_629_10213"
+    }
+ }
+]
