@@ -24,9 +24,9 @@ public class IImportStatServiceImpl implements IImportStatService{
     public List<ImportStatDto> getImportStats(String typeImport) {
         List<ImportModel> importModels;
         if (typeImport != null) {
-            importModels = importRepository.findByTypeImportAndUserDownloadIsNotNullAndDateDownloadIsNotNull(TypeImportEnum.valueOf(typeImport));
+            importModels = importRepository.findByTypeImportAndUserDownloadNotNull(TypeImportEnum.valueOf(typeImport));
         } else {
-            importModels = importRepository.findByUserDownloadIsNotNullAndDateDownloadIsNotNull();
+            importModels = importRepository.findByUserDownloadNotNull();
         }
         Map<TypeImportEnum, ImportStatDto> importStats = new HashMap<>();
 
@@ -36,7 +36,7 @@ public class IImportStatServiceImpl implements IImportStatService{
                 importStats.put(typeImportEnum, new ImportStatDto(typeImportEnum));
             }
             ImportStatDto importStat = importStats.get(typeImportEnum);
-
+            importStat.incrementTotalImport();
             if (importModel.getUserDownload() == null) {
                 importStat.incrementNonDownloaded();
             } else {
@@ -45,4 +45,10 @@ public class IImportStatServiceImpl implements IImportStatService{
         }
         return new ArrayList<>(importStats.values());
     }
+
 }
+
+
+
+
+

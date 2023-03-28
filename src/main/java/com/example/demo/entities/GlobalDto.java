@@ -4,21 +4,11 @@ import lombok.Data;
 
 @Data
 public class GlobalDto {
-
     private String libelle;
+    private TypeImportEnum typeImport;
 
-    public GlobalDto(String libelle) {
+    public GlobalDto(String libelle, TypeImportEnum typeImport) {
         this.libelle = libelle;
+        this.typeImport=typeImport;
     }
-
-    public String getLibelle() {
-        return libelle;
-    }
-
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
-
-
 }

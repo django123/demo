@@ -1,19 +1,33 @@
+// implementer un service qui fourni les statistiques des détails lorsqu'on clique sur le bouton voir detail  d'un fichier dont les operations on un status différent de TREATED par FileTypeEnum
+
+{
+   "total": 10,
+  "notTreated": 12,
+  "imports": [
+    {
+      "libelle": "Debit PCE Fraude",
+      "typeImport": "IMPORT_630_10207",
+      "totalImport": 5
+    },
+    {
+      "libelle": "Emission d'un impayé",
+      "typeImport": "IMPORT_628_10211",
+      "totalImport": 5
+    }
+  ]
+
+}
+
+
+
 //implementer un service qui fourni les statistiques par typeImport dont userDownload et dateDownload sont non null
+
 [
   {
-    "libelle": "Debit PCE Fraude",
-    "nombre non télécharger": 2,
-    "typeImport": "IMPORT_630_10207"
-  },
-  {
-    "libelle": "Emission d'un impayé",
-    "nombre non télécharger": 0,
-    "typeImport": "IMPORT_628_10211"
-  },
-  {
-    "libelle": "Debit Client BNPP",
-    "nombre non télécharger": 3,
-    "typeImport": "IMPORT_629_10213"
+  "libelle": "Debit PCE Fraude",
+  "nombre non télécharger": 2,
+  "typeImport": "IMPORT_630_10207",
+   "totalImport": 5
   }
 ];
 
@@ -21,27 +35,24 @@
   {
   "libelle": "Debit PCE Fraude",
   "nombre non télécharger": 2,
-  "typeImport": "IMPORT_630_10207"
+  "typeImport": "IMPORT_630_10207",
+  "totalImport": 5
+  },
+  {
+  "libelle": "Emission d'un impayé",
+  "nombre non télécharger": 0,
+  "typeImport": "IMPORT_628_10211"
+  },
+  {
+  "libelle": "Debit Client BNPP",
+  "nombre non télécharger": 3,
+  "typeImport": "IMPORT_629_10213",
+  "totalImport": 5
+  },
+  {
+  "libelle": "Debit Client BNPP",
+  "nombre non télécharger": 3,
+  "typeImport": "IMPORT_629_10213",
+  "totalImport": 5
   }
 ];
-
-[
-
- "type de Fichier": {
-     {
-     "libelle": "Debit PCE Fraude",
-     "nombre traité": 2,
-    "typeImport": "IMPORT_630_10207"
-    },
-    {
-    "libelle": "Emission d'un impayé",
-    "nombre traité": 0,
-    "typeImport": "IMPORT_628_10211"
-    },
-    {
-    "libelle": "Debit Client BNPP",
-    "nombre traité": 3,
-    "typeImport": "IMPORT_629_10213"
-    }
- }
-]

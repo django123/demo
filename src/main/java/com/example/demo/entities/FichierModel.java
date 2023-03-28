@@ -27,6 +27,8 @@ public class FichierModel implements Serializable {
 
     private LocalDate dateEtat;
 
+    private long nbrOperations;
+
     @OneToMany(mappedBy = "fichier")
     @JsonIgnore
     private List<OperationModel> operations;

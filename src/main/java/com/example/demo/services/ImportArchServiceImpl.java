@@ -32,9 +32,10 @@ public class ImportArchServiceImpl implements IImportArchService{
 
     @Override
     public void archive() {
-        ImportArchModel importArchModel = new ImportArchModel();
+
         List<CarteModel>carteModels = carteRepo.findAll();
         carteModels.forEach(carteModel -> {
+            ImportArchModel importArchModel = new ImportArchModel();
             List<OperationModel> operationModels = operationRepo.findByStatut(OperationStatusEnum.TREATED);
             operationModels.stream()
                     .map(op ->importRepo.findByOperation_Id(op.getId()))
