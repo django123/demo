@@ -57,6 +57,7 @@ public class FichierServiceImpl implements IFichierService{
         List<TypeImportEnum> typesImport = Arrays.asList(TypeImportEnum.values());
         for (TypeImportEnum typeImport : typesImport) {
             List<OperationModel> operations = operationRepository.findByTypeImportAndFichierId(typeImport, fichierId);
+
             if (operations.size() > 0) {
                 List<OperationModel> nonTreatedOperations = new ArrayList<>();
                 for (OperationModel operation : operations) {
@@ -64,15 +65,14 @@ public class FichierServiceImpl implements IFichierService{
                         nonTreatedOperations.add(operation);
                     }
                 }
-            }
+                if (nonTreatedOperations.size() > 0) {
+                    ImportStatDto importStatistiques = new ImportStatDto();
+                    importStatistiques.setLibelle("");
+                    importStatistiques.setTypeImport(typeImport);
+                    importStatistiques.setTotalImport(nonTreatedOperations.size());
 
-            if (operations.size() > 0) {
-                ImportStatDto importStatistiques = new ImportStatDto();
-                importStatistiques.setLibelle("test");
-                importStatistiques.setTypeImport(typeImport);
-                importStatistiques.setTotalImport(operations.size());
-
-                statistiques.getImportStatDtos().add(importStatistiques);
+                    statistiques.getImportStatDtos().add(importStatistiques);
+                }
             }
         }
 
