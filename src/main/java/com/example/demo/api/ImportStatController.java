@@ -1,6 +1,8 @@
 package com.example.demo.api;
 
+import com.example.demo.entities.FichierStatistiquesModel;
 import com.example.demo.entities.ImportStatDto;
+import com.example.demo.services.IFichierService;
 import com.example.demo.services.IImportStatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +16,16 @@ public class ImportStatController {
 
     @Autowired
     private IImportStatService importStatService;
+    @Autowired
+    private IFichierService fichierService;
 
     @GetMapping("/import-stats")
     public List<ImportStatDto> getImportStats(@RequestParam(required = false) String typeImport) {
         return importStatService.getImportStats(typeImport);
+    }
+    @GetMapping("/doris-stats")
+    public FichierStatistiquesModel dorisStat(@RequestParam Long id){
+       return fichierService.getFichierStatistics(id);
     }
 }
 

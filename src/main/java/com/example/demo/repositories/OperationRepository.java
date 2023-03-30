@@ -12,6 +12,6 @@ public interface OperationRepository extends JpaRepository<OperationModel, Long>
  List<OperationModel>findByStatutAndTypeImport(OperationStatusEnum statut, TypeImportEnum typeImport);
  List<OperationModel>findByStatutAndTypeImportAndAndFichier_Id(OperationStatusEnum statut, TypeImportEnum typeImport,Long id);
 
- List<OperationModel> findByStatutAndTypeImportAndFichierId(List<OperationStatusEnum> statuts, TypeImportEnum typeImport, Long fichierId);
+ //List<OperationModel> findByStatutAndTypeImportAndFichierId(List<OperationStatusEnum> statuts, TypeImportEnum typeImport, Long fichierId);
  List<OperationModel> findByTypeImportAndFichierId(TypeImportEnum typeImport, Long fichierId);
 }

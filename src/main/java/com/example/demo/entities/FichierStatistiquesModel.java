@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FichierStatistiquesModel {
@@ -9,6 +10,9 @@ public class FichierStatistiquesModel {
 
     List<ImportStatDto>importStatDtos;
 
+    public FichierStatistiquesModel() {
+        this.importStatDtos = new ArrayList<>();
+    }
 
     public long getTotal() {
         return total;
