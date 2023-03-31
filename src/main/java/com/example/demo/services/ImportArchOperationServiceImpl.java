@@ -28,28 +28,42 @@ public class ImportArchOperationServiceImpl implements IImportArchOpService{
 
     @Override
     public void archiveImport(TypeImportEnum typeImportEnum) {
+        archiveOperationsForAllCartesWithTypeImport(typeImportEnum);
+        deleteEmptyCartes();
+    }
 
+    private void archiveOperationsForAllCartesWithTypeImport(TypeImportEnum typeImportEnum) {
         List<CarteModel> carteModels = carteRepo.findAll();
-        carteModels.forEach(carteModel -> {
-            ImportArchModel importArchModel = new ImportArchModel();
-            List<OperationModel> operationModels = operationRepo.findByStatutAndTypeImport(OperationStatusEnum.TREATED,typeImportEnum);
-            operationModels.stream()
-                    .map(op -> importRepo.findByOperation_Id(op.getId()))
-                    .filter(imp -> (imp != null && imp.getUserDownload() != null && imp.getDateDownload() != null))
-                    .forEach(importModel -> {
-                        importArchModel.setFileId(String.valueOf(importModel.getOperation().getFichier().getId()));
-                        importArchModel.setCodeMvt1(importModel.getCodeMvt1());
-                        importArchModel.setEvenmt(importModel.getEvenmt());
-                        importArchModel.setDdc(importModel.getDdc());
-                        importArchModel.setDossier1(importModel.getDossier1());
-                        importArchModel.setMontant(importModel.getMontant());
-                        importArchModel.setTypeImport(importModel.getTypeImport());
-                        importArchRepo.save(importArchModel);
-                        importRepo.deleteById(importModel.getId());
-                    });
-            if (operationModels.isEmpty())
-                carteRepo.deleteById(carteModel.getId());
-        });
+        carteModels.forEach(carteModel -> archiveOperationsForCarteWithTypeImport(carteModel, typeImportEnum));
+    }
+
+    private void archiveOperationsForCarteWithTypeImport(CarteModel carteModel, TypeImportEnum typeImportEnum) {
+        List<OperationModel> operationModels = operationRepo.findByStatutAndTypeImport(OperationStatusEnum.TREATED, typeImportEnum);
+        operationModels.stream()
+                .map(op -> importRepo.findByOperation_Id(op.getId()))
+                .filter(imp -> imp != null && imp.getUserDownload() != null && imp.getDateDownload() != null)
+                .forEach(importModel -> {
+                    ImportArchModel importArchModel = createImportArchModelFromImportModel(importModel);
+                    importArchRepo.save(importArchModel);
+                    importRepo.deleteById(importModel.getId());
+                });
+    }
+    private void deleteEmptyCartes() {
+        carteRepo.findAll().stream()
+                .filter(carteModel -> operationRepo.findByCarte_Id(carteModel.getId()).isEmpty())
+                .forEach(carte -> carteRepo.deleteById(carte.getId()));
+    }
+
+    private ImportArchModel createImportArchModelFromImportModel(ImportModel importModel) {
+        ImportArchModel importArchModel = new ImportArchModel();
+        importArchModel.setFileId(String.valueOf(importModel.getOperation().getFichier().getId()));
+        importArchModel.setCodeMvt1(importModel.getCodeMvt1());
+        importArchModel.setEvenmt(importModel.getEvenmt());
+        importArchModel.setDdc(importModel.getDdc());
+        importArchModel.setDossier1(importModel.getDossier1());
+        importArchModel.setMontant(importModel.getMontant());
+        importArchModel.setTypeImport(importModel.getTypeImport());
+        return importArchModel;
     }
 }
 
