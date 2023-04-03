@@ -3,13 +3,11 @@ package com.example.demo.services;
 import com.example.demo.entities.*;
 import com.example.demo.repositories.FichierRepository;
 import com.example.demo.repositories.OperationRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -81,7 +79,41 @@ public class FichierServiceImpl implements IFichierService{
         return statistiques;
     }
 
+    @Override
+    public Map<String, Object> dorisFichierStatistics(Long fichierId) {
+        FichierModel fichier = fichierRepository.findById(fichierId)
+                .orElseThrow(() -> new EntityNotFoundException("Fichier not found"));
 
+        // Retrieve all operations with status other than TREATED for the given fichier
+        List<OperationModel> operations = operationRepository.findByFichierAndStatutNot(fichier, OperationStatusEnum.TREATED);
+
+        // Calculate the statistics
+        long total = operations.size();
+        long notTreated = operations.stream()
+                .filter(operation -> operation.getStatut() != OperationStatusEnum.TREATED)
+                .count();
+        Map<String, Long> imports = new HashMap<>();
+        for (OperationModel op : operations){
+            String typeImport = op.getTypeImport().toString();
+            imports.put(typeImport, imports.getOrDefault(typeImport,0L) +1L);
+        }
+
+        // Build the response JSON
+        Map<String, Object> response = new HashMap<>();
+        response.put("total", total);
+        response.put("notTreated", notTreated);
+        List<Map<String, Object>> importsList = new ArrayList<>();
+        imports.forEach((typeImport, count) -> {
+            Map<String, Object> importMap = new HashMap<>();
+            importMap.put("libelle", typeImport.toString());
+            importMap.put("typeImport", typeImport.toString());
+            importMap.put("totalImport", count);
+            importsList.add(importMap);
+        });
+        response.put("imports", importsList);
+
+        return response;
+    }
 
 }
 
@@ -165,6 +197,10 @@ public class FichierServiceImpl implements IFichierService {
         return statistiques;*//*
     }
 }*/
+
+
+
+
 
 
 

@@ -1,5 +1,6 @@
 package com.example.demo.repositories;
 
+import com.example.demo.entities.FichierModel;
 import com.example.demo.entities.OperationModel;
 import com.example.demo.entities.OperationStatusEnum;
 import com.example.demo.entities.TypeImportEnum;
@@ -16,4 +17,6 @@ public interface OperationRepository extends JpaRepository<OperationModel, Long>
  List<OperationModel> findByTypeImportAndFichierId(TypeImportEnum typeImport, Long fichierId);
 
  List<OperationModel> findByCarte_Id(Long carteId);
+
+    List<OperationModel> findByFichierAndStatutNot(FichierModel fichier, OperationStatusEnum treated);
 }

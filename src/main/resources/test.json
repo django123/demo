@@ -20,7 +20,7 @@
 
 
 
-//implementer un service qui fourni les statistiques par typeImport dont userDownload et dateDownload sont non null
+//implementer un service qui fourni les statistiques par typeImport dont userDownload et dateDownload sont null
 
 [
   {
