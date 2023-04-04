@@ -40,8 +40,8 @@ public class FichierController {
         fichierService.deleteById(id);
     }
 
-    @GetMapping("/{fichierId}/statistics")
-    public ResponseEntity<Map<String, Object>> getFichierStatistics(@PathVariable Long fichierId) {
+    @GetMapping("/statistics")
+    public ResponseEntity<Map<String, Object>> getFichierStatistics(@RequestParam Long fichierId) {
         Map<String, Object> response = fichierService.dorisFichierStatistics(fichierId);
         return ResponseEntity.ok(response);
     }
