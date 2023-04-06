@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 class FichierStatisticsControllerTest {
@@ -49,7 +48,6 @@ class FichierStatisticsControllerTest {
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertEquals(response, result.getBody());
 
-        Mockito.verify(fichierStatisticsService, times(1)).getFichierStatistics(fichierId);
         Mockito.verifyNoMoreInteractions(fichierStatisticsService);
     }
 

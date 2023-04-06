@@ -1,7 +1,6 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.FichierModel;
-import com.example.demo.entities.FichierStatistiquesModel;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +12,6 @@ public interface IFichierService {
     FichierModel findById(Long id);
     void deleteById(Long id);
 
-    FichierStatistiquesModel getFichierStatistics(Long fichierId);
+    //FichierStatistiquesModel getFichierStatistics(Long fichierId);
     Map<String, Object> dorisFichierStatistics(Long fichierId);
 }

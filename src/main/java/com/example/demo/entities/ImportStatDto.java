@@ -13,9 +13,9 @@ public class ImportStatDto {
     private long totalDownloaded;
     private long totalNonDownloaded;
 
-    public ImportStatDto(TypeImportEnum typeImport) {
+    public ImportStatDto(TypeImportEnum typeImport, String libelle) {
         this.typeImport = typeImport;
-        this.libelle = typeImport.toString();
+        this.libelle = libelle;
     }
 
     public TypeImportEnum getTypeImport() {

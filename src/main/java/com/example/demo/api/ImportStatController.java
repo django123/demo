@@ -23,9 +23,6 @@ public class ImportStatController {
     public List<ImportStatDto> getImportStats(@RequestParam(required = false) String typeImport) {
         return importStatService.getImportStats(typeImport);
     }
-    @GetMapping("/doris-stats")
-    public FichierStatistiquesModel dorisStat(@RequestParam Long id){
-       return fichierService.getFichierStatistics(id);
-    }
+
 }
 
