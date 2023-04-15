@@ -19,4 +19,6 @@ public interface OperationRepository extends JpaRepository<OperationModel, Long>
  List<OperationModel> findByCarte_Id(Long carteId);
 
     List<OperationModel> findByFichier_IdAndStatutNot(Long fichierId, OperationStatusEnum treated);
+
+    List<OperationModel> findByTypeImport(TypeImportEnum typeImportEnum);
 }

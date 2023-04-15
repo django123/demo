@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -28,6 +29,10 @@ public class FichierModel implements Serializable {
     private LocalDate dateEtat;
 
     private long nbrOperations;
+
+    private Boolean state;
+
+    private LocalDateTime dateModification;
 
     @OneToMany(mappedBy = "fichier")
     @JsonIgnore

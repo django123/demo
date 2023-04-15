@@ -65,5 +65,20 @@ public class ImportArchOperationServiceImpl implements IImportArchOpService{
         importArchModel.setTypeImport(importModel.getTypeImport());
         return importArchModel;
     }
+
+
+    private void archiveOperationsForCarteWithTypeImport_(CarteModel carteModel, TypeImportEnum typeImportEnum) {
+        List<OperationModel> operationModels = operationRepo.findByTypeImport(typeImportEnum);
+        operationModels.stream()
+                .filter(op -> !op.getStatut().equals(OperationStatusEnum.INIT) && !op.getStatut().equals(OperationStatusEnum.IN_PROGRESS) &&!op.getStatut().equals(OperationStatusEnum.TO_BE_REVIEWED))
+                .map(op -> importRepo.findByOperation_Id(op.getId()))
+                .filter(imp -> imp != null && imp.getUserDownload() != null && imp.getDateDownload() != null)
+                .forEach(importModel -> {
+                    ImportArchModel importArchModel = createImportArchModelFromImportModel(importModel);
+                    importArchRepo.save(importArchModel);
+                    importRepo.deleteById(importModel.getId());
+                });
+    }
+
 }
 
