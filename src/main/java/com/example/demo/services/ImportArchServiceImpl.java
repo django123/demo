@@ -15,6 +15,7 @@ package com.example.demo.services;
 
         import java.io.IOException;
         import java.lang.reflect.Field;
+        import java.time.LocalDate;
         import java.util.ArrayList;
         import java.util.Arrays;
         import java.util.List;
@@ -41,6 +42,21 @@ public class ImportArchServiceImpl implements IImportArchService{
     public void archive() {
         archiveOperationsForAllCartes();
         deleteEmptyCartes();
+    }
+
+    @Override
+    public List<ImportArchModel> findByTypeImport(TypeImportEnum typeImportEnum) {
+        return importArchRepo.findByTypeImport(typeImportEnum);
+    }
+
+    @Override
+    public List<ImportArchModel> findByTypeImportAndDate(TypeImportEnum typeImportEnum, LocalDate startDate, LocalDate endDate) {
+        return null;
+    }
+
+    @Override
+    public List<ImportArchModel> findByTypeImportAndDateBetween(TypeImportEnum typeImportEnum, LocalDate startDate, LocalDate endDate) {
+        return null;
     }
 
     public StringBuilder createFileContent(ConfigImportModel config)throws  IOException, IllegalAccessException{

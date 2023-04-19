@@ -2,8 +2,13 @@ package com.example.demo;
 
 import com.example.demo.api.ImportStatController;
 import com.example.demo.entities.ImportStatDto;
+import com.example.demo.repositories.ImportRepositoryImp;
+import com.example.demo.repositories.OperationRepository;
 import com.example.demo.services.IImportStatService;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -24,6 +29,23 @@ class ImportStatControllerTest {
 
     @MockBean
     private IImportStatService importStatService;
+    @InjectMocks
+    private ImportRepositoryImp importRepositoryImp;
+
+    @Mock
+    private OperationRepository operationRepository;
+
+    @Test
+    public void testUpdateOperationStatutCarteId() {
+        // Données de test
+        Long carteId = 123L;
+
+        // Appel de la méthode à tester
+        importRepositoryImp.updateOperationStatutCarteId(carteId);
+
+        // Vérification que la méthode d'updateOperationStatusCarteId est appelée avec le bon argument
+        Mockito.verify(operationRepository, Mockito.times(1)).updateOperationStatusCarteId(carteId);
+    }
 
     @Test
     public void testGetImportStats() throws Exception {

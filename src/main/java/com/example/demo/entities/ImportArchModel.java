@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -22,6 +23,7 @@ public class ImportArchModel implements Serializable {
     private String dossier1;
     private String codeMvt1;
     private Double montant;
+    private LocalDate dateCreate;
     @Enumerated(EnumType.STRING)
     private TypeImportEnum typeImport;
 
